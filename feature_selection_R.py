@@ -1,0 +1,55 @@
+#installing Boruta library
+install.packages("Boruta")
+#calling Boruta
+libray(Boruta)
+
+#setting working directory
+setwd("C:/Users/nitum/Desktop/Data/R")
+#loading data set for training
+traindata <- read.csv("output2.csv", header = T, stringsAsFactors = F) 
+
+#taking a look at the data
+str(traindata)
+#gsub() is used to replace one expression with another. Here, underscores are replaced with blank.
+names(traindata) <- gsub("_", "", names(traindata))
+
+#checking dataset for missing values
+summary(traindata)
+
+#replacing blank cells with NA
+traindata[traindata == ""] <- NA
+#list wise deletion method is used
+traindata <- traindata[complete.cases(traindata),]
+#checking for missing values again
+summary(traindata)
+
+#implementing the algorithm
+set.seed(123)
+boruta.train <- Boruta(DOEID~.-DOLLAREL, data = traindata, doTrace = 2)
+print(boruta.train)
+
+#plotting the boruta variable importance chart
+#attributes are added to x-axis vertically
+plot(boruta.train, xlab = "", xaxt = "n")
+lz<-lapply(1:ncol(boruta.train$ImpHistory),function(i)
+boruta.train$ImpHistory[is.finite(boruta.train$ImpHistory[,i]),i])
+names(lz) <- colnames(boruta.train$ImpHistory)
+Labels <- sort(sapply(lz,median))
+axis(side = 1,las=2,labels = names(Labels), at = 1:ncol(boruta.train$ImpHistory), cex.axis = 0.7)
+
+#Red box represents rejected attributes
+#Yellow box represents tentative attributes
+#Green box represents confirmed attributes
+#Blue box represents minimum, average and maximum score of shadow attributes.
+
+#Taking decision on tentative attributes based on median score of attribute
+final.boruta <- TentativeRoughFix(boruta.train)
+print(final.boruta)
+
+#list of all confirmed attributes
+getSelectedAttributes(final.boruta, withTentative = F)
+
+#final results obtained using Boruta in a data frame
+boruta.df <- attStats(final.boruta)
+class(boruta.df)
+print(boruta.df)
