@@ -48,3 +48,6 @@ Predicted the electricity bill amount for the next month of a given residential 
 
 6. Error Calculation for accuracy measurement
 To evaluate the efficiency of the model, MAE (mean absolute error) and RMSE (root mean square error) are calculated for the predicted values. The error is between the testing set and the predicted values. The predicted value can be greater than, lesser than or equal to the actual value. MAE is useful in this case as it measures the accuracy for continuous variables.
+
+Data set obtained from:
+https://catalog.data.gov/dataset/residential-energy-consumption-survey-recs-files-energy-consumption-2009#topic=energy_navigation
