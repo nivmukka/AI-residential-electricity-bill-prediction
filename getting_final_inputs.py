@@ -9,3 +9,5 @@ with open('finalinputs.csv', 'wb') as csv1:
         reader = csv.DictReader(csv2)         
         for row in reader:      
             writer.writerow({'TYPEHUQ':row['TYPEHUQ'],'HDD30YR':row['HDD30YR'],'CDD30YR':row['CDD30YR'],'BEDROOMS':row['BEDROOMS'],'NCOMBATH':row['NCOMBATH'],'TOTROOMS':row['TOTROOMS'],'CELLAR':row['CELLAR'],'GARGHEAT':row['GARGHEAT'],'HEATROOM':row['HEATROOM'],'ACROOMS':row['ACROOMS'],'USECENAC':row['USECENAC'],'TEMPNITEAC':row['TEMPNITEAC'],'TOTSQFT':row['TOTSQFT'],'TOTHSQFT':row['TOTHSQFT'],'TOTCSQFT':row['TOTCSQFT'],'KWH':row['KWH'],'KWHCOL':row['KWHCOL'],'KWHRFG':row['KWHRFG'],'KWHOTH':row['KWHOTH'],'DOLELCOL':row['DOLELCOL'],'DOLELWTH':row['DOLELWTH'],'DOLELRFG':row['DOLELRFG'],'DOLELOTH':row['DOLELOTH'],'DOLLAREL':row['DOLLAREL']})
+
+            #this is a comment
